@@ -1,4 +1,5 @@
 import { GlassCard } from '../components/captains/GlassCard'
+import { MissionCard } from '../components/captains/MissionCard'
 import { SectionHeading } from '../components/captains/SectionHeading'
 import { CaptainsForm } from '../components/captains/CaptainsForm'
 import { content } from '../content/captains'
@@ -6,10 +7,12 @@ import { content } from '../content/captains'
 export default function CaptainsPage() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-navy-deep text-foreground">
+      {/* Background Blobs */}
       <div className="glow-blob w-[320px] h-[320px] bg-gradient-to-br from-[#ff007f] to-[#7f00ff] top-[18%] -left-[160px]" />
       <div className="glow-blob w-[280px] h-[280px] bg-gradient-to-br from-[#00f2fe] to-[#4facfe] top-[48%] -right-[140px]" />
       <div className="glow-blob w-[350px] h-[350px] bg-gradient-to-br from-[#ffb347] to-[#ff7b00] top-[78%] -left-[175px]" />
 
+      {/* Hero */}
       <section
         className="relative min-h-[82vh] overflow-hidden px-6 pt-[12vh] pb-24"
         style={{
@@ -46,10 +49,15 @@ export default function CaptainsPage() {
         </div>
       </section>
 
+      {/* What We Need */}
       <section className="mx-auto max-w-[620px] px-5 py-20">
         <GlassCard>
           <SectionHeading>{content.whatWeNeed.heading}</SectionHeading>
-          <p className="mb-8 text-moonstone/80">{content.whatWeNeed.description}</p>
+
+          <p className="mb-8 text-moonstone/80">
+            {content.whatWeNeed.description}
+          </p>
+
           <ul className="space-y-4">
             {content.whatWeNeed.items.map((item: string, i: number) => (
               <li key={i} className="flex gap-3">
@@ -61,38 +69,75 @@ export default function CaptainsPage() {
         </GlassCard>
       </section>
 
-      <section className="mx-auto max-w-[620px] px-5 py-20">
+      {/* Mission */}
+      <section className="mx-auto max-w-[820px] px-5 py-20">
         <SectionHeading>Your Mission</SectionHeading>
-        <div className="space-y-8">
+
+        <div className="space-y-10">
           {content.missions.map((mission: any) => (
-            <div key={mission.number} className="glass-card rounded-[28px] p-8">
-              <div className="flex items-start gap-5">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-saffron font-bold text-ocean-deep">{mission.number}</div>
-                <div className="flex-1">
-                  <h3 className="mb-2 text-xl font-bold">{mission.title}</h3>
-                  <p className="mb-5 text-moonstone/75">{mission.description}</p>
-                  <img src={`/assets/Step ${mission.number}.png`} alt={mission.screenshotAlt} className="mb-5 aspect-video w-full rounded-xl object-cover" />
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-moonstone/60">⏱ {mission.estTime}</span>
-                    <a href={mission.ctaHref} target="_blank" rel="noreferrer" className="rounded-full bg-saffron px-5 py-2 font-semibold text-ocean-deep">{mission.cta}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <MissionCard
+              key={mission.number}
+              step={{
+                number: String(mission.number),
+                title: mission.title,
+                description: mission.description,
+                estTime: mission.estTime,
+                screenshot: `/assets/Step ${mission.number}.png`,
+                screenshotAlt: mission.screenshotAlt,
+                cta: mission.cta,
+                ctaHref: mission.ctaHref,
+              }}
+            />
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-[620px] px-5 py-20"><GlassCard><SectionHeading>{content.beforeYouStart.heading}</SectionHeading><div className="space-y-6">{Object.entries(content.beforeYouStart.sections).map(([k, s]: any) => <div key={k}><h3 className="mb-3 text-xs uppercase tracking-[0.18em] text-white/70">{s.heading}</h3><ul className="space-y-2">{s.items.map((it: string, i: number) => <li key={i}>• {it}</li>)}</ul></div>)}</div></GlassCard></section>
-
-      <section id="form" className="mx-auto max-w-[620px] px-5 py-20">
+      {/* Before You Start */}
+      <section className="mx-auto max-w-[620px] px-5 py-20">
         <GlassCard>
-          <SectionHeading>Complete Your Profile</SectionHeading>
-          <p className="mb-8 text-moonstone/80">Let us know a bit about your crew and when you're ready to start.</p>
+          <SectionHeading>
+            {content.beforeYouStart.heading}
+          </SectionHeading>
+
+          <div className="space-y-6">
+            {Object.entries(content.beforeYouStart.sections).map(
+              ([key, section]: any) => (
+                <div key={key}>
+                  <h3 className="mb-3 text-xs uppercase tracking-[0.18em] text-white/70">
+                    {section.heading}
+                  </h3>
+
+                  <ul className="space-y-2">
+                    {section.items.map((item: string, i: number) => (
+                      <li key={i}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            )}
+          </div>
+        </GlassCard>
+      </section>
+
+      {/* Form */}
+      <section
+        id="form"
+        className="mx-auto max-w-[620px] px-5 py-20"
+      >
+        <GlassCard>
+          <SectionHeading>
+            Complete Your Profile
+          </SectionHeading>
+
+          <p className="mb-8 text-moonstone/80">
+            Let us know a bit about your crew and when you're ready to start.
+          </p>
+
           <CaptainsForm />
         </GlassCard>
       </section>
 
+      {/* Footer */}
       <footer className="border-t border-white/10 px-5 py-10 text-center text-sm text-white/40">
         © 2026 WildLog. Made for spearfishers.
       </footer>
