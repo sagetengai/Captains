@@ -53,6 +53,12 @@ export function CaptainsForm() {
       return
     }
 
+    if (!supabase) {
+      setErrorMsg('Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to enable profile submissions.')
+      setLoading(false)
+      return
+    }
+
     try {
       const payload: any = {
         name: formData.name.trim(),

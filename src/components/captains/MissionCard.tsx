@@ -5,16 +5,20 @@ import {
   Trophy,
   Clock3,
   ArrowRight,
+  Waves,
 } from 'lucide-react'
+import { useState } from 'react'
 
 import { GlassCard } from './GlassCard'
 
 interface MissionStep {
   number: string
   title: string
+  why: string
   description: string
   estTime: string
   screenshot: string
+  media?: string
   screenshotAlt: string
   cta?: string
   ctaHref?: string
@@ -29,16 +33,18 @@ const icons = [
   ClipboardCheck,
   Camera,
   Trophy,
+  Waves,
 ]
 
 export function MissionCard({ step }: MissionCardProps) {
   const index = Math.max(Number(step.number) - 1, 0)
   const Icon = icons[index] ?? ClipboardCheck
+  const [mediaSrc, setMediaSrc] = useState(step.media ?? step.screenshot)
 
   return (
     <GlassCard className="animate-fade-in">
 
-      <div className="flex items-start gap-6">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
 
         <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl">
 
@@ -64,6 +70,10 @@ export function MissionCard({ step }: MissionCardProps) {
 
           </div>
 
+          <p className="mb-4 max-w-2xl text-lg font-semibold leading-8 text-white">
+            {step.why}
+          </p>
+
           <p className="mb-8 max-w-2xl text-lg leading-8 text-white/70">
             {step.description}
           </p>
@@ -71,8 +81,10 @@ export function MissionCard({ step }: MissionCardProps) {
           <div className="mb-8 overflow-hidden rounded-3xl border border-white/10">
 
             <img
-              src={step.screenshot}
+              src={mediaSrc}
               alt={step.screenshotAlt}
+              loading="lazy"
+              onError={() => setMediaSrc(step.screenshot)}
               className="block w-full"
             />
 
