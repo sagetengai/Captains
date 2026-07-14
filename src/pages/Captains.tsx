@@ -1,6 +1,7 @@
 import { GlassCard } from '../components/captains/GlassCard'
 import { MissionCard } from '../components/captains/MissionCard'
 import { OnboardingVideo } from '../components/captains/OnboardingVideo'
+import { PrimaryButton } from '../components/captains/PrimaryButton'
 import { ProgressChecklist } from '../components/captains/ProgressChecklist'
 import { SectionHeading } from '../components/captains/SectionHeading'
 import { StickyHelpButton } from '../components/captains/StickyHelpButton'
@@ -103,6 +104,26 @@ export default function CaptainsPage() {
               }}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Account CTA */}
+      <section className="mx-auto max-w-[620px] px-5 py-10">
+        <div className="text-center">
+          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-white/55">
+            Before you fill out the profile
+          </p>
+          <PrimaryButton
+            href={content.missions[0].ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full text-lg"
+          >
+            Get Started
+          </PrimaryButton>
+          <p className="mt-4 text-sm leading-6 text-moonstone/75">
+            Create your WildLog account in the app first, then come back here to complete your Captain profile.
+          </p>
         </div>
       </section>
 

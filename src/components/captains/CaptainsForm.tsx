@@ -109,7 +109,7 @@ export function CaptainsForm() {
         </p>
         <div className="space-y-4">
           <a
-            href={`https://wa.me/YOUR_WHATSAPP_NUMBER_HERE?text=${whatsappMessage}`}
+            href={`https://wa.me/13343431635?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full px-6 py-3.5 bg-saffron text-navy-deep font-semibold rounded-full hover:shadow-saffron-glow transition-all duration-200 active:scale-[0.98]"
