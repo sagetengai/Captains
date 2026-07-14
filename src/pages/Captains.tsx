@@ -117,7 +117,7 @@ export default function CaptainsPage() {
             href={content.missions[0].ctaHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full text-lg"
+            className="h-[74px] w-full bg-gradient-to-b from-[#FFC44D] to-[#F6B22E] text-xl font-bold text-[#061426] shadow-[0_18px_40px_rgba(255,181,52,.28)] hover:-translate-y-1 hover:brightness-105"
           >
             Get Started
           </PrimaryButton>
